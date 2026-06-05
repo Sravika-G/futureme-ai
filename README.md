@@ -1,4 +1,4 @@
-# FutureMe — Meet the version of you who already made it.
+# FutureMe - Meet the version of you who already made it.
 
 FutureMe is an AI-powered personal reflection web application. Users input details about their current life, age, goals, struggles, and one-year vision, select a specific tone (Motivational, Brutally Honest, Calm Mentor, CEO Mode), and receive a structured personal reflection blueprint from their future self. Once generated, users can copy their blueprints and enter an active, contextual chat thread with their future identity.
 
