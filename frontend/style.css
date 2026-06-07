@@ -1016,3 +1016,62 @@ body {
         width: 100%;
     }
 }
+
+/* --- Daily Action Plan Timeline --- */
+.daily-plan-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.plan-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: var(--transition-smooth);
+}
+
+.plan-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--glass-border-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.plan-time-badge {
+    background: rgba(0, 113, 227, 0.08);
+    color: #3897ff;
+    border: 1px solid rgba(0, 113, 227, 0.25);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 113, 227, 0.1);
+}
+
+.plan-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.plan-action {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.plan-purpose {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.45;
+}

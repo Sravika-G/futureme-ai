@@ -124,7 +124,14 @@ Return ONLY a valid JSON object in this exact format. Do not include markdown co
   ],
   "habit": "One small, specific daily habit they should start today, phrased in an actionable way.",
   "warning": "One mistake or distraction loop their future self warns them about.",
-  "mantra": "A short, memorable, inspiring line they can repeat daily."
+  "mantra": "A short, memorable, inspiring line they can repeat daily.",
+  "dailyPlan": [
+    {
+      "time": "Phase or time (e.g., '07:30 AM Focus' or '09:00 AM Deep Work')",
+      "action": "A clear, specific, motivating action for this block.",
+      "purpose": "The core purpose of this action to sustain motivation."
+    }
+  ]
 }`;
 
     const result = await model.generateContent({
@@ -142,9 +149,21 @@ Return ONLY a valid JSON object in this exact format. Do not include markdown co
             },
             habit: { type: "string" },
             warning: { type: "string" },
-            mantra: { type: "string" }
+            mantra: { type: "string" },
+            dailyPlan: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  time: { type: "string" },
+                  action: { type: "string" },
+                  purpose: { type: "string" }
+                },
+                required: ["time", "action", "purpose"]
+              }
+            }
           },
-          required: ["message", "futureIdentity", "nextMoves", "habit", "warning", "mantra"]
+          required: ["message", "futureIdentity", "nextMoves", "habit", "warning", "mantra", "dailyPlan"]
         }
       }
     });

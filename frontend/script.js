@@ -147,6 +147,26 @@ async function generateFutureMe(event) {
         document.getElementById('resultWarning').innerText = data.data.warning || 'No critical threat detected.';
         document.getElementById('resultMantra').innerText = data.data.mantra ? `"${data.data.mantra}"` : 'Keep the circle small.';
 
+        // Populate Daily Plan Timeline
+        const planContainer = document.getElementById('resultDailyPlan');
+        planContainer.innerHTML = '';
+        if (data.data.dailyPlan && data.data.dailyPlan.length > 0) {
+            data.data.dailyPlan.forEach(item => {
+                const planItem = document.createElement('div');
+                planItem.className = 'plan-item';
+                planItem.innerHTML = `
+                    <span class="plan-time-badge">${item.time}</span>
+                    <div class="plan-details">
+                        <span class="plan-action">${item.action}</span>
+                        <span class="plan-purpose">${item.purpose}</span>
+                    </div>
+                `;
+                planContainer.appendChild(planItem);
+            });
+        } else {
+            planContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 14px; padding: 10px;">No action plan generated.</div>';
+        }
+
         // Make elements visible and dynamic
         loader.style.display = 'none';
         resultContainer.style.display = 'block';
@@ -196,6 +216,14 @@ function copyResultToClipboard() {
     const warning = document.getElementById('resultWarning').innerText;
     const mantra = document.getElementById('resultMantra').innerText;
 
+    const dailyPlanText = Array.from(document.querySelectorAll('#resultDailyPlan .plan-item'))
+        .map(item => {
+            const time = item.querySelector('.plan-time-badge').innerText;
+            const action = item.querySelector('.plan-action').innerText;
+            const purpose = item.querySelector('.plan-purpose').innerText;
+            return `[${time}] ${action}\n  ↳ Purpose: ${purpose}`;
+        }).join('\n\n');
+
     const formattedText = `===========================================
 FUTUREME TEMPORAL IDENTITY BLUEPRINT
 ===========================================
@@ -226,6 +254,10 @@ ${warning}
 -------------------------------------------
 DAILY MANTRA SYSTEM:
 ${mantra}
+
+-------------------------------------------
+DAILY ACTION PLAN:
+${dailyPlanText || 'None'}
 ===========================================`;
 
     navigator.clipboard.writeText(formattedText)
